@@ -5,8 +5,13 @@ import java.io.InputStreamReader;
 
 import me.martinwerner.command.Command;
 import me.martinwerner.command.CommandManager;
+import me.martinwerner.command.MapCommand;
 import me.martinwerner.command.MoveCommand;
+import me.martinwerner.command.QuitCommand;
+import me.martinwerner.command.StatsCommand;
 import me.martinwerner.entity.Player;
+import me.martinwerner.util.TextColor;
+import me.martinwerner.util.TextUtil;
 
 public class Monsterz {
 	
@@ -18,9 +23,9 @@ public class Monsterz {
 		
 		setupMap();
 		
-		System.out.println("=== Welcome to Monsterz (Beta) ===");
-		System.out.println("In this interactive game, you will scout your way through the map and find a lot of exciting things.");
-		System.out.println("Good luck!");
+		TextUtil.displayTextLine(TextColor.RED + "=== Welcome to Monsterz (Beta) ===");
+		TextUtil.displayTextLine("In this interactive game, you will scout your way through the map and find a lot of exciting things.");
+		TextUtil.displayTextLine("Good luck!");
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -51,15 +56,13 @@ public class Monsterz {
 		Tile playerTile = gameMap.getRandomTile();
 				
 		player.move(playerTile);
-		
-		System.out.println(gameMap.getMapDisplay());
 	}
 	
 	public static void handleCommand(String line) {
-		String fullCommand[] = line.split(" ");
+		String fullCommand[] = line.trim().split(" ");
 		
 		if(fullCommand.length <= 0) {
-			System.out.println("You try to make a sound, but the words won't come out...");
+			TextUtil.displayTextLine("You try to make a sound, but the words won't come out...");
 		} else {
 			Command command = CommandManager.getCommandByName(fullCommand[0]);
 			
@@ -71,7 +74,7 @@ public class Monsterz {
 						continue;
 					}
 										
-					args[i-1] = fullCommand[i];
+					args[i-1] = fullCommand[i].trim();
 				}
 				
 				// Proceed to next turn if this command is an action
@@ -85,11 +88,14 @@ public class Monsterz {
 	}
 	
 	public static void nextTurn() {
-		
+		// TODO Move monster(s) and other stuff
 	}
 	
 	public static void registerCommands() {
-		CommandManager.registerCommand("move", new MoveCommand());
+		CommandManager.registerCommand(new MoveCommand());
+		CommandManager.registerCommand(new StatsCommand());
+		CommandManager.registerCommand(new QuitCommand());
+		CommandManager.registerCommand(new MapCommand());
 	}
 	
 	public static Player getPlayer() {

@@ -36,8 +36,8 @@ public class GameMap {
 	}
 	
 	public Tile getRandomTile() {		
-		int tileX = (int) Math.round(Math.random() * this.xSize);
-		int tileY = (int) Math.round(Math.random() * this.ySize);
+		int tileX = (int) Math.floor(Math.random() * this.xSize);
+		int tileY = (int) Math.floor(Math.random() * this.ySize);
 		
 		return this.getTileAtLocation(new Location(tileX, tileY));
 	}
@@ -66,9 +66,7 @@ public class GameMap {
 			
 			for(int x=0;x<this.xSize;++x) {
 				Tile tile = this.getTileAtLocation(new Location(x, y));
-				
-				System.out.println(x + ", " + y);
-				
+								
 				if(tile.getLivingEntities().size() > 0) {
 					mapString += "x";
 				} else {

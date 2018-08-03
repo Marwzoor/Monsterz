@@ -14,7 +14,7 @@ public abstract class Entity {
 		this.loc = loc;
 	}
 	
-	public void move(Tile tile) {		
+	public void move(Tile tile) {	
 		if(this.currentTile != null) {
 			this.currentTile.removeEntity(this);
 		}
