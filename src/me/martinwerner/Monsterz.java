@@ -13,6 +13,7 @@ import me.martinwerner.command.StatsCommand;
 import me.martinwerner.entity.Item;
 import me.martinwerner.entity.ItemManager;
 import me.martinwerner.entity.Player;
+import me.martinwerner.gui.GUIManager;
 import me.martinwerner.util.TextColor;
 import me.martinwerner.util.TextUtil;
 
@@ -25,6 +26,8 @@ public class Monsterz {
 		registerCommands();
 		
 		setupMap();
+		
+		GUIManager.prepareGUI();
 		
 		TextUtil.displayTextLine(TextColor.RED + "=== Welcome to Monsterz (Beta) ===");
 		TextUtil.displayTextLine("In this interactive game, you will scout your way through the map and find a lot of exciting things.");
