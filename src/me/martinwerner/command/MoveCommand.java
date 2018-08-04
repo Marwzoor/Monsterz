@@ -1,6 +1,7 @@
 package me.martinwerner.command;
 
 import me.martinwerner.Monsterz;
+import me.martinwerner.util.TextUtil;
 
 public class MoveCommand extends Command {
 	
@@ -10,7 +11,7 @@ public class MoveCommand extends Command {
 
 	public boolean execute(String args[]) {
 		if(args.length < 1) {
-			System.out.println("Where do you wanna go?");
+			TextUtil.displayTextLine("Where do you wanna go?");
 			return false;
 		}
 
@@ -38,7 +39,7 @@ public class MoveCommand extends Command {
 		}
 		
 		if(!Monsterz.getPlayer().move(moveX, moveY)) {
-			System.out.println("I'm sorry but you can't move that way.");
+			TextUtil.displayTextLine("I'm sorry but you can't move that way.");
 			return false;
 		}
 		

@@ -72,7 +72,7 @@ public class GameMap {
 				} else if(tile.getItems().size() > 0) {
 					mapString += "I";
 				} else {
-					mapString += ".";
+					mapString += "-";
 				}
 			}
 			

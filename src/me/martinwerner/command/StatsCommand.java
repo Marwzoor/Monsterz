@@ -2,6 +2,7 @@ package me.martinwerner.command;
 
 import me.martinwerner.Monsterz;
 import me.martinwerner.entity.Player;
+import me.martinwerner.util.TextUtil;
 
 public class StatsCommand extends Command {
 
@@ -12,7 +13,7 @@ public class StatsCommand extends Command {
 	public boolean execute(String args[]) {
 		Player player = Monsterz.getPlayer();
 		
-		System.out.println("HP: " + player.getHealth());
+		TextUtil.displayTextLine("HP: " + player.getHealth());
 		
 		return true;
 	}

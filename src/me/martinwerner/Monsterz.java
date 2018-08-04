@@ -1,20 +1,20 @@
 package me.martinwerner;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.awt.Color;
 
 import me.martinwerner.command.Command;
 import me.martinwerner.command.CommandManager;
+import me.martinwerner.command.DropCommand;
 import me.martinwerner.command.LookCommand;
 import me.martinwerner.command.MapCommand;
 import me.martinwerner.command.MoveCommand;
+import me.martinwerner.command.PickupCommand;
 import me.martinwerner.command.QuitCommand;
 import me.martinwerner.command.StatsCommand;
 import me.martinwerner.entity.Item;
 import me.martinwerner.entity.ItemManager;
 import me.martinwerner.entity.Player;
 import me.martinwerner.gui.GUIManager;
-import me.martinwerner.util.TextColor;
 import me.martinwerner.util.TextUtil;
 
 public class Monsterz {
@@ -29,22 +29,9 @@ public class Monsterz {
 		
 		GUIManager.prepareGUI();
 		
-		TextUtil.displayTextLine(TextColor.RED + "=== Welcome to Monsterz (Beta) ===");
-		TextUtil.displayTextLine("In this interactive game, you will scout your way through the map and find a lot of exciting things.");
-		TextUtil.displayTextLine("Good luck!");
-		
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
-			String line = in.readLine();
-
-			while (line != null) {
-				handleCommand(line);
-				line = in.readLine();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		TextUtil.displayTextLine("=== Welcome to Monsterz (Beta) ===", Color.RED);
+		TextUtil.displayTextLine("In this interactive game, you will scout your way through the map and find a lot of exciting things.", Color.RED);
+		TextUtil.displayTextLine("Good luck!", Color.RED);
 	}
 	
 	public static GameMap getMap() {
@@ -102,8 +89,11 @@ public class Monsterz {
 				if(command.willEndTurn() && command.execute(args)) {
 					nextTurn();
 				}
+				
+				GUIManager.refreshMap();
+				GUIManager.refreshInventory();
 			} else {
-				System.out.println("Now you're just talking jibberish!");
+				TextUtil.displayTextLine("Now you're just talking jibberish!");
 			}
 		}
 	}
@@ -118,6 +108,8 @@ public class Monsterz {
 		CommandManager.registerCommand(new QuitCommand());
 		CommandManager.registerCommand(new MapCommand());
 		CommandManager.registerCommand(new LookCommand());
+		CommandManager.registerCommand(new PickupCommand());
+		CommandManager.registerCommand(new DropCommand());
 	}
 	
 	public static Player getPlayer() {
