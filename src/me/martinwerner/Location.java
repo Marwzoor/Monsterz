@@ -4,6 +4,11 @@ public class Location {
 
 	private int x, y;
 	
+	public Location(Location loc) {
+		this.x = loc.getX();
+		this.y = loc.getY();
+	}
+	
 	public Location(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -25,5 +30,7 @@ public class Location {
 		return "Loc X: "  + this.getX()
 			+ ", Loc Y: " + this.getY();
 	}
+	
+	
 	
 }

@@ -67,8 +67,10 @@ public class GameMap {
 			for(int x=0;x<this.xSize;++x) {
 				Tile tile = this.getTileAtLocation(new Location(x, y));
 								
-				if(tile.getLivingEntities().size() > 0) {
-					mapString += "x";
+				if(tile.getPlayers().size() > 0) {
+					mapString += "P";
+				} else if(tile.getItems().size() > 0) {
+					mapString += "I";
 				} else {
 					mapString += ".";
 				}

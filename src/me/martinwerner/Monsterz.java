@@ -5,10 +5,13 @@ import java.io.InputStreamReader;
 
 import me.martinwerner.command.Command;
 import me.martinwerner.command.CommandManager;
+import me.martinwerner.command.LookCommand;
 import me.martinwerner.command.MapCommand;
 import me.martinwerner.command.MoveCommand;
 import me.martinwerner.command.QuitCommand;
 import me.martinwerner.command.StatsCommand;
+import me.martinwerner.entity.Item;
+import me.martinwerner.entity.ItemManager;
 import me.martinwerner.entity.Player;
 import me.martinwerner.util.TextColor;
 import me.martinwerner.util.TextUtil;
@@ -56,6 +59,21 @@ public class Monsterz {
 		Tile playerTile = gameMap.getRandomTile();
 				
 		player.move(playerTile);
+		
+		spawnItems();
+	}
+	
+	public static void spawnItems() {
+		ItemManager.loadItems();
+		
+		int itemsToSpawn = 2 + (int) Math.floor(Math.random() * 5);
+		
+		for(int i=0;i<itemsToSpawn;++i) {
+			Tile tile = gameMap.getRandomTile();
+			Item newItem = ItemManager.getRandomItem();
+			
+			newItem.move(tile);
+		}
 	}
 	
 	public static void handleCommand(String line) {
@@ -96,6 +114,7 @@ public class Monsterz {
 		CommandManager.registerCommand(new StatsCommand());
 		CommandManager.registerCommand(new QuitCommand());
 		CommandManager.registerCommand(new MapCommand());
+		CommandManager.registerCommand(new LookCommand());
 	}
 	
 	public static Player getPlayer() {

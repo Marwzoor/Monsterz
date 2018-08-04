@@ -7,11 +7,11 @@ public abstract class Entity {
 	private Tile currentTile = null;
 	
 	public Location getLocation() {
-		return this.loc;
+		return new Location(this.loc);
 	}
 	
 	public void setLocation(Location loc) {
-		this.loc = loc;
+		this.loc = new Location(loc);
 	}
 	
 	public void move(Tile tile) {	
@@ -57,5 +57,9 @@ public abstract class Entity {
 		int newY = this.getLocation().getY() + yTiles;
 		
 		return this.move(new Location(newX, newY));
+	}
+	
+	public Tile getCurrentTile() {
+		return this.currentTile;
 	}
 }

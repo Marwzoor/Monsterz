@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.martinwerner.entity.Entity;
+import me.martinwerner.entity.Item;
 import me.martinwerner.entity.LivingEntity;
+import me.martinwerner.entity.Player;
 
 public class Tile {
 	
@@ -44,6 +46,30 @@ public class Tile {
 		}
 		
 		return livingEntities;
+	}
+	
+	public List<Item> getItems() {
+		List<Item> items = new ArrayList<Item>();
+		
+		for(Entity entity : this.entities) {
+			if(entity instanceof Item) {
+				items.add((Item) entity);
+			}
+		}
+		
+		return items;
+	}
+	
+	public List<Player> getPlayers() {
+		List<Player> players = new ArrayList<Player>();
+		
+		for(Entity entity : this.entities) {
+			if(entity instanceof Player) {
+				players.add((Player) entity);
+			}
+		}
+		
+		return players;
 	}
 	
 	public void addEntity(Entity entity) {
